@@ -150,7 +150,7 @@ function App() {
     };
 
     const handleSelectSize = (size) => {
-        setManuallySelectedSize(size);
+        setManuallySelectedSize(size === manuallySelectedSize ? null : size);
         setSelectedCar(null);
     };
 

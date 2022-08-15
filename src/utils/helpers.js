@@ -102,7 +102,7 @@ export const createCarLabel = (car) => {
  */
 export const computePayment = (lotSize, parkStartTime, parkEndTime) => {
     const consumedTimeInHours = Math.ceil(
-        (parkEndTime - parkStartTime) / 1000 / 60 / 60
+        (parkEndTime - parkStartTime) / 1000 / 60 / 60 // convert date difference in hours
     );
 
     let cost = 0,
