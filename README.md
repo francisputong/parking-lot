@@ -2,7 +2,7 @@
 
 A web app which simulates a parking system.
 
-[Web app deployed on Heroku](https://devmeapp.herokuapp.com/)
+[Web app deployed on Netlify](https://62fa8c4886c9c222e929152c--superlative-squirrel-2c0be4.netlify.app/)
 
 ## Installation and Setup Instructions
 
