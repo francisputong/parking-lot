@@ -1,0 +1,12 @@
+.entrance {
+    border: 2px solid orange;
+    height: 60px;
+}
+
+.entrance.-inactive {
+    opacity: 0.5;
+}
+
+.entrance.-active {
+    opacity: 1;
+}
