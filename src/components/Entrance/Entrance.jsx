@@ -4,6 +4,7 @@ import "./entrance.css";
 const Entrance = ({ isActiveEntrance, onClick }) => {
     return (
         <div
+            data-testid='entrance'
             onClick={onClick}
             className={`entrance ${
                 !isActiveEntrance ? "-inactive" : "-active"
