@@ -11,6 +11,7 @@ import {
 } from "./utils/helpers";
 import { GRACE_PERIOD_IN_SECONDS } from "./utils/constants";
 import Sidebar from "./components/Sidebar/Sidebar";
+import AppTabs from "./components/Tabs/Tabs";
 import "./App.css";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         rows: 5,
         columns: 5,
     });
+    const [manuallySelectedSize, setManuallySelectedSize] = useState(null);
 
     const [selectedCar, setSelectedCar] = useState(null);
     const [cars, setCars] = useState([]);
@@ -102,14 +104,21 @@ function App() {
     };
 
     const handleClickParking = (lot) => {
-        if (!lot.parkedCarId) return;
-
-        let carsCopy = [...cars];
         let parkingLotDataCopy = [...parkingLotData];
-
         const lotIndex = parkingLotDataCopy.findIndex(
             (data) => data.id === lot.id
         );
+
+        if (!lot.parkedCarId && manuallySelectedSize) {
+            parkingLotDataCopy[lotIndex].size = manuallySelectedSize;
+            setParkingLotData(parkingLotDataCopy);
+            return;
+        } else if (lot.parkedCarId && manuallySelectedSize) {
+            alert("Cannot change size of an occupied parking slot.");
+            return;
+        }
+
+        let carsCopy = [...cars];
 
         const carIndex = carsCopy.findIndex(
             (data) => data.id === lot.parkedCarId
@@ -137,6 +146,12 @@ function App() {
 
     const handleSelectCar = (carId) => {
         setSelectedCar(carId);
+        setManuallySelectedSize(null);
+    };
+
+    const handleSelectSize = (size) => {
+        setManuallySelectedSize(size);
+        setSelectedCar(null);
     };
 
     return (
@@ -147,17 +162,34 @@ function App() {
                     setParkingLotDimensions={setParkingLotDimensions}
                 />
                 <div className='d-flex flex-column align-items-center justify-content-center w-100'>
-                    <div className='selected-car'>
-                        <span>Selected Car</span>
-                        <span>
-                            {selectedCar
-                                ? createCarLabel(
-                                      cars.find((car) => car.id === selectedCar)
-                                  )
-                                : "-"}
-                        </span>
-                    </div>
                     <div className='parking-container'>
+                        <div className='d-flex align-items-center justify-content-between mb-3'>
+                            <div className='selected-car'>
+                                <span>Selected Car</span>
+                                <span>
+                                    {selectedCar
+                                        ? createCarLabel(
+                                              cars.find(
+                                                  (car) =>
+                                                      car.id === selectedCar
+                                              )
+                                          )
+                                        : "-"}
+                                </span>
+                            </div>
+                            <div className='flex-column'>
+                                <span>Manually assign parking size</span>
+                                <AppTabs
+                                    activeKey={manuallySelectedSize}
+                                    onSelect={handleSelectSize}
+                                    tabsList={[
+                                        { key: 1, value: "S" },
+                                        { key: 2, value: "M" },
+                                        { key: 3, value: "L" },
+                                    ]}
+                                />
+                            </div>
+                        </div>
                         {parkingLotData.length &&
                             // Slice parking lot data into chunks to render it as a matrix
                             sliceIntoChunks(
