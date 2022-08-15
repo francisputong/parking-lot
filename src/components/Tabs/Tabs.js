@@ -7,7 +7,7 @@ const AppTabs = ({ activeKey, onSelect, tabsList }) => {
         <div>
             <Tabs
                 defaultActiveKey='4'
-                id='justify-tab-example'
+                id='tab'
                 variant='pills'
                 justify
                 onSelect={onSelect}
@@ -15,7 +15,12 @@ const AppTabs = ({ activeKey, onSelect, tabsList }) => {
             >
                 {tabsList.map((option) => {
                     return (
-                        <Tab eventKey={option.key} title={option.value}></Tab>
+                        <Tab
+                            key={option.key}
+                            data-testid={option.value}
+                            eventKey={option.key}
+                            title={option.value}
+                        ></Tab>
                     );
                 })}
             </Tabs>

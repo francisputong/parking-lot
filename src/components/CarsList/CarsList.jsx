@@ -42,6 +42,7 @@ const CarsList = ({ carsList, handleSelectCar }) => {
                                         )}
                                     </Card.Text>
                                     <Button
+                                        data-testid={`car-${i}`}
                                         onClick={() => handleSelectCar(car.id)}
                                         variant='primary'
                                     >

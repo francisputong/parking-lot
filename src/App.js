@@ -116,7 +116,7 @@ function App() {
         } else if (lot.parkedCarId && manuallySelectedSize) {
             alert("Cannot change size of an occupied parking slot.");
             return;
-        }
+        } else if (!manuallySelectedSize && !lot.parkedCarId) return;
 
         let carsCopy = [...cars];
 

@@ -27,6 +27,7 @@ const Sidebar = ({
                     <Form.Group className='mb-3'>
                         <Form.Label>Rows</Form.Label>
                         <Form.Select
+                            name='rows'
                             value={parkingLotDimensions.rows}
                             onChange={(e) => {
                                 setParkingLotDimensions({
@@ -47,6 +48,7 @@ const Sidebar = ({
                     <Form.Group className='mb-3'>
                         <Form.Label>Columns</Form.Label>
                         <Form.Select
+                            name='columns'
                             value={parkingLotDimensions.columns}
                             onChange={(e) => {
                                 setParkingLotDimensions({
