@@ -9,7 +9,7 @@ import {
     createCarLabel,
     computePayment,
 } from "./utils/helpers";
-import { GRACE_PERIOD_IN_SECONDS } from "./utils/constants";
+import { TIME_TO_RESET } from "./utils/constants";
 import Sidebar from "./components/Sidebar/Sidebar";
 import AppTabs from "./components/Tabs/Tabs";
 import "./App.css";
@@ -76,12 +76,13 @@ function App() {
                     carsCopy[carIndex].parkStartTime =
                         carsCopy[carIndex].parkEndTime &&
                         (new Date() - carsCopy[carIndex].parkEndTime) / 1000 <
-                            GRACE_PERIOD_IN_SECONDS
+                            TIME_TO_RESET
                             ? carsCopy[carIndex].parkStartTime
                             : new Date();
 
                     setCars(carsCopy);
                     setSelectedCar(null);
+
                     return;
                 }
             }
@@ -112,9 +113,11 @@ function App() {
         if (!lot.parkedCarId && manuallySelectedSize) {
             parkingLotDataCopy[lotIndex].size = manuallySelectedSize;
             setParkingLotData(parkingLotDataCopy);
+
             return;
         } else if (lot.parkedCarId && manuallySelectedSize) {
             alert("Cannot change size of an occupied parking slot.");
+
             return;
         } else if (!manuallySelectedSize && !lot.parkedCarId) return;
 

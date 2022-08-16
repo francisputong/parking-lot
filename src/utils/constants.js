@@ -15,5 +15,5 @@ export const RATES = {
     3: 100,
 };
 
-export const GRACE_PERIOD_IN_SECONDS = 3600;
+export const TIME_TO_RESET = 3600;
 export const FLAT_RATE_HOURS = 3;
